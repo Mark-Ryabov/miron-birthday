@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Приглашение на день рождения!</title>
+  <meta name="description" content="Приглашение на детский день рождения — дата, место, программа праздника">
+
+  <!-- Шрифты: Pacifico — декоративный, Comfortaa — заголовки, Nunito — текст -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Comfortaa:wght@500;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+  <!-- ======== 1. HERO: имя, возраст, дата + шарики и конфетти ======== -->
+  <header class="hero" id="hero">
+    <!-- Сюда JS добавляет парящие шарики -->
+    <div class="hero__balloons" id="balloons" aria-hidden="true"></div>
+    <!-- Сюда JS добавляет конфетти при загрузке -->
+    <div class="hero__confetti" id="confetti" aria-hidden="true"></div>
+
+    <div class="hero__content">
+      <p class="hero__invite" data-anim="hero">Приглашаю на день рождения</p>
+      <h1 class="hero__name" id="childName" data-anim="hero"></h1>
+      <div class="hero__age" id="childAge" data-anim="hero"></div>
+      <p class="hero__date" id="partyDate" data-anim="hero"></p>
+    </div>
+
+    <a class="hero__scroll" href="#countdown" aria-label="Листай вниз">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+
+    <!-- Волнистый переход к контенту -->
+    <svg class="hero__wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 C360,110 1080,0 1440,50 L1440,90 L0,90 Z" fill="#FFF9F0"/>
+    </svg>
+  </header>
+
+  <main>
+    <!-- ======== 2. ОБРАТНЫЙ ОТСЧЁТ ======== -->
+    <section class="section reveal" id="countdown">
+      <h2 class="section__title">До праздника осталось</h2>
+      <div class="countdown__grid" id="countdownGrid">
+        <div class="countdown__card countdown__card--yellow">
+          <span class="countdown__num" id="cdDays">0</span>
+          <span class="countdown__label" id="cdDaysLabel">дней</span>
+        </div>
+        <div class="countdown__card countdown__card--coral">
+          <span class="countdown__num" id="cdHours">0</span>
+          <span class="countdown__label" id="cdHoursLabel">часов</span>
+        </div>
+        <div class="countdown__card countdown__card--turquoise">
+          <span class="countdown__num" id="cdMinutes">0</span>
+          <span class="countdown__label" id="cdMinutesLabel">минут</span>
+        </div>
+        <div class="countdown__card countdown__card--orange">
+          <span class="countdown__num" id="cdSeconds">0</span>
+          <span class="countdown__label" id="cdSecondsLabel">секунд</span>
+        </div>
+      </div>
+      <p class="countdown__done" id="countdownDone" hidden>Праздник начался! 🎉</p>
+    </section>
+
+    <!-- ======== 3. ГДЕ И КОГДА ======== -->
+    <section class="section reveal" id="where">
+      <h2 class="section__title">Где и когда</h2>
+      <div class="where__card">
+        <p class="where__datetime" id="whereDateTime"></p>
+        <p class="where__address" id="address"></p>
+        <div class="where__map">
+          <iframe id="mapIframe" title="Карта проезда" loading="lazy" allowfullscreen></iframe>
+          <!-- Оверлей: скролл идёт странице, а не карте; клик активирует карту -->
+          <div class="where__map-overlay" id="mapOverlay">
+            <span class="where__map-hint">Нажмите, чтобы двигать карту</span>
+          </div>
+        </div>
+        <a class="btn" id="mapLink" href="#" target="_blank" rel="noopener">
+          Открыть в Яндекс Картах
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ======== 4. ПРОГРАММА ПРАЗДНИКА ======== -->
+    <section class="section reveal" id="program">
+      <h2 class="section__title">Программа праздника</h2>
+      <ol class="timeline" id="timeline"><!-- пункты добавляет JS --></ol>
+    </section>
+
+    <!-- ======== 5. ЧТО ВЗЯТЬ С СОБОЙ ======== -->
+    <section class="section reveal" id="bring">
+      <h2 class="section__title">Что взять с собой</h2>
+      <ul class="bring__list" id="bringList"><!-- пункты добавляет JS --></ul>
+    </section>
+
+    <!-- ======== 6. ФОТО ИМЕНИННИКА (сейчас скрыто — раскомментируй, чтобы вернуть) ========
+    <section class="section reveal" id="photo">
+      <div class="photo__frame" id="photoFrame">
+        <img id="childPhoto" src="" alt="">
+      </div>
+      <p class="photo__caption" id="photoCaption"></p>
+    </section>
+    -->
+
+    <!-- ======== 7. ИДЕИ ДЛЯ ПОДАРКОВ ======== -->
+    <section class="section reveal" id="gifts">
+      <h2 class="section__title">Идеи для подарков</h2>
+      <div class="gifts__card">
+        <div class="gifts__icon" aria-hidden="true">🎁</div>
+        <p class="gifts__text" id="giftsText"></p>
+        <a class="btn" id="wishlistLink" href="#" target="_blank" rel="noopener">
+          <span id="wishlistBtnText"></span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ======== 8. КОНТАКТЫ ======== -->
+    <section class="section reveal" id="contacts">
+      <h2 class="section__title">Вопросы? Звоните!</h2>
+      <ul class="contacts__list" id="contactsList"><!-- контакты добавляет JS --></ul>
+    </section>
+  </main>
+
+  <!-- ======== 9. ФУТЕР ======== -->
+  <footer class="footer">
+    <p class="footer__text">Ждём вас!</p>
+    <div class="footer__hearts" id="footerHearts" aria-hidden="true"></div>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger через CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- config.js — приватные данные, в репозитории его нет (шаблон: config.example.js) -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

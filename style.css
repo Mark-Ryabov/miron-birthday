@@ -1,0 +1,580 @@
+/* ============================================================
+   Приглашение на день рождения — стили
+   Палитра: жёлтый, оранжевый, бирюзовый, мягкий коралловый
+   Mobile-first: одна колонка, на десктопе — шире и крупнее
+   ============================================================ */
+
+:root {
+  --yellow: #ffd93d;
+  --orange: #ff9a3d;
+  --turquoise: #4ecdc4;
+  --coral: #ff6b6b;
+  --coral-soft: #ff8e8e;
+  --cream: #fff9f0;
+  --ink: #4a3f35;
+  --white: #ffffff;
+  --shadow: 0 10px 30px rgba(74, 63, 53, 0.12);
+  --radius: 24px;
+  --font-display: 'Pacifico', cursive;
+  --font-heading: 'Comfortaa', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 20px 110px;
+  background: linear-gradient(160deg, #ffe29a 0%, #ffb37a 45%, var(--coral-soft) 100%);
+  overflow: hidden;
+}
+
+.hero__balloons,
+.hero__confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__confetti {
+  z-index: 3;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__invite {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1rem, 3.5vw, 1.35rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 14vw, 7rem);
+  line-height: 1.15;
+  color: var(--white);
+  text-shadow: 0 4px 0 rgba(214, 90, 90, 0.55), 0 10px 30px rgba(74, 63, 53, 0.25);
+  margin: 8px 0;
+}
+
+.hero__age {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 9vw, 4.5rem);
+  color: var(--ink);
+  background: var(--yellow);
+  border-radius: 999px;
+  padding: 0.1em 0.7em;
+  box-shadow: var(--shadow);
+  transform: rotate(-3deg);
+}
+
+.hero__date {
+  margin-top: 22px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+  color: var(--ink);
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 96px;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: var(--white);
+  opacity: 0.9;
+  animation: bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 10px); }
+}
+
+.hero__wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 90px;
+  z-index: 1;
+}
+
+/* Шарик — SVG внутри абсолютно позиционированного div (создаётся в JS) */
+.balloon {
+  position: absolute;
+  will-change: transform;
+}
+
+/* Конфетти — маленькие цветные фигурки (создаются в JS) */
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  will-change: transform;
+}
+
+/* ============ ОБЩЕЕ ДЛЯ СЕКЦИЙ ============ */
+
+.section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 20px 8px;
+}
+
+.section__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+/* Подчёркивание-«мазок» под заголовком */
+.section__title::after {
+  content: '';
+  display: block;
+  width: 90px;
+  height: 8px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--yellow), var(--orange), var(--coral));
+}
+
+/* ============ ОБРАТНЫЙ ОТСЧЁТ ============ */
+
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.countdown__card {
+  border-radius: var(--radius);
+  padding: 22px 10px;
+  text-align: center;
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.countdown__card--yellow    { background: var(--yellow); color: var(--ink); }
+.countdown__card--coral     { background: var(--coral); }
+.countdown__card--turquoise { background: var(--turquoise); color: var(--ink); }
+.countdown__card--orange    { background: var(--orange); }
+
+.countdown__num {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 9vw, 3.4rem);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.countdown__done {
+  margin-top: 24px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--coral);
+}
+
+/* ============ ГДЕ И КОГДА ============ */
+
+.where__card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.where__datetime {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--coral);
+}
+
+.where__address {
+  margin-top: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.where__map {
+  position: relative; /* для оверлея поверх iframe */
+  margin: 22px 0;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 3px var(--cream);
+  aspect-ratio: 4 / 3;
+  background: #eee;
+}
+
+/* Оверлей поверх карты: не даёт iframe перехватывать скролл страницы */
+.where__map-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.where__map-overlay.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.where__map-hint {
+  margin-bottom: 14px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(74, 63, 53, 0.8);
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.where__map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Кнопка-ссылка */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--turquoise);
+  padding: 14px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(74, 63, 53, 0.2);
+}
+
+/* ============ ПРОГРАММА (таймлайн) ============ */
+
+.timeline {
+  list-style: none;
+  position: relative;
+  padding-left: 34px;
+}
+
+/* Вертикальная линия таймлайна */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--yellow), var(--orange), var(--coral), var(--turquoise));
+}
+
+.timeline__item {
+  position: relative;
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* Точка на линии */
+.timeline__item::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 22px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--coral);
+  border: 3px solid var(--cream);
+  box-shadow: 0 0 0 2px var(--coral);
+}
+
+.timeline__icon {
+  font-size: 1.7rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.timeline__time {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--orange);
+  font-size: 0.95rem;
+}
+
+.timeline__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.timeline__text {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* ============ ЧТО ВЗЯТЬ С СОБОЙ ============ */
+
+.bring__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.bring__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 14px 18px;
+  font-weight: 600;
+}
+
+.bring__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  border-radius: 14px;
+  background: var(--cream);
+}
+
+/* ============ ФОТО ============ */
+
+#photo {
+  text-align: center;
+}
+
+.photo__frame {
+  width: min(260px, 70vw);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 10px;
+  background: conic-gradient(var(--yellow), var(--orange), var(--coral), var(--turquoise), var(--yellow));
+  box-shadow: var(--shadow);
+  will-change: transform;
+}
+
+.photo__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid var(--white);
+}
+
+.photo__caption {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--coral);
+}
+
+/* ============ ИДЕИ ДЛЯ ПОДАРКОВ ============ */
+
+.gifts__card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.gifts__icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.gifts__text {
+  font-size: 1.05rem;
+  margin-bottom: 22px;
+}
+
+/* ============ КОНТАКТЫ ============ */
+
+.contacts__list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.contacts__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contacts__item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(74, 63, 53, 0.2);
+}
+
+.contacts__who {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.contacts__who small {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  opacity: 0.65;
+}
+
+.contacts__phone {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--turquoise);
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+
+.contacts__phone:hover {
+  text-decoration: underline;
+}
+
+/* ============ ФУТЕР ============ */
+
+.footer {
+  margin-top: 64px;
+  padding: 64px 20px 48px;
+  text-align: center;
+  background: linear-gradient(160deg, var(--turquoise) 0%, #7be0d8 100%);
+  border-radius: 48px 48px 0 0;
+}
+
+.footer__text {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 9vw, 4rem);
+  color: var(--white);
+  text-shadow: 0 4px 0 rgba(46, 139, 133, 0.4);
+}
+
+.footer__hearts {
+  margin-top: 18px;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer__heart {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ============ ДЕСКТОП ============ */
+
+@media (min-width: 720px) {
+  .section {
+    padding-top: 72px;
+  }
+
+  .countdown__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .bring__list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .where__map {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Уменьшенная анимация для тех, кто просит меньше движения */
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll {
+    animation: none;
+  }
+}
