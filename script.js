@@ -13,6 +13,13 @@ if (typeof CONFIG === 'undefined') {
   throw new Error('CONFIG is not defined: создай config.js из config.example.js');
 }
 
+/* Всегда открывать страницу с верха: иначе браузер при обновлении
+   восстанавливает позицию скролла (на мобильных — заметнее всего) */
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 /* Цвета шариков и конфетти — из палитры сайта */
 const PALETTE = ['#ffd93d', '#ff9a3d', '#4ecdc4', '#ff6b6b', '#ff8e8e', '#7be0d8'];
 
