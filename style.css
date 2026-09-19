@@ -353,25 +353,28 @@ img {
   align-items: flex-start;
 }
 
-/* Точка на линии: центр линии на 12px от края таймлайна (left:10 + width:4/2),
-   точка 14px → left = 12 - 7 - 34(padding) = -29px для точного центрирования */
-.timeline__item::before {
+.timeline__icon {
+  position: relative; /* точка таймлайна позиционируется от иконки */
+  font-size: 1.7rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Точка на линии: вертикально — по центру иконки (top:50% + translateY),
+   горизонтально — на линии (центр линии 12px от края таймлайна,
+   иконка на 52px → left = 12 - 7 - 52 = -47px) */
+.timeline__icon::before {
   content: '';
   position: absolute;
-  left: -29px;
-  top: 22px;
+  left: -47px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 14px;
   height: 14px;
   border-radius: 50%;
   background: var(--coral);
   border: 3px solid var(--cream);
   box-shadow: 0 0 0 2px var(--coral);
-}
-
-.timeline__icon {
-  font-size: 1.7rem;
-  line-height: 1;
-  flex-shrink: 0;
 }
 
 .timeline__time {
