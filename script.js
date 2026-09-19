@@ -109,7 +109,7 @@ function renderContent() {
   contactsList.innerHTML = CONFIG.contacts.map((c) => {
     // Иконки мессенджеров — только если ссылка задана в config.js
     const socials = [
-      c.vk ? `<a class="contacts__social contacts__social--vk" href="${c.vk}" target="_blank" rel="noopener" aria-label="Написать во ВКонтакте">VK</a>` : '',
+      c.vk ? `<a class="contacts__social contacts__social--vk" href="${c.vk}" target="_blank" rel="noopener" aria-label="Написать во ВКонтакте"><img class="contacts__social-icon" src="vk.svg" alt=""></a>` : '',
       c.max ? `<a class="contacts__social contacts__social--max" href="${c.max}" target="_blank" rel="noopener" aria-label="Написать в MAX">MAX</a>` : '',
     ].join('');
     return `

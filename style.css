@@ -546,7 +546,14 @@ img {
 }
 
 .contacts__social--vk {
-  background: #0077ff; /* фирменный синий VK */
+  padding: 0; /* иконка занимает весь бейдж */
+  background: none; /* синий фон уже внутри SVG */
+}
+
+.contacts__social-icon {
+  display: block;
+  width: 44px;
+  height: 44px;
 }
 
 .contacts__social--max {
