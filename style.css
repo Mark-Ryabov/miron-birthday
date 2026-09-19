@@ -487,14 +487,60 @@ img {
   border-radius: 18px;
   box-shadow: var(--shadow);
   padding: 16px 20px;
-  text-decoration: none;
-  color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .contacts__item:hover {
   transform: translateY(-3px);
   box-shadow: 0 14px 34px rgba(74, 63, 53, 0.2);
+}
+
+/* Зона звонка — вся левая часть карточки */
+.contacts__call {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Иконки мессенджеров */
+.contacts__socials {
+  display: flex;
+  gap: 8px;
+}
+
+.contacts__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 14px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.contacts__social:hover {
+  transform: scale(1.08);
+  filter: brightness(1.08);
+}
+
+.contacts__social--vk {
+  background: #0077ff; /* фирменный синий VK */
+}
+
+.contacts__social--max {
+  background: linear-gradient(135deg, #7b5cff, #4da3ff); /* градиент MAX */
 }
 
 .contacts__who {

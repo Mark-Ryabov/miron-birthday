@@ -105,14 +105,22 @@ function renderContent() {
 
   // Контакты
   const contactsList = document.getElementById('contactsList');
-  contactsList.innerHTML = CONFIG.contacts.map((c) => `
-    <li>
-      <a class="contacts__item" href="tel:${c.phone.replace(/[^+\d]/g, '')}">
-        <span class="contacts__who">${c.name}<small>${c.role}</small></span>
-        <span class="contacts__phone">${c.phone}</span>
-      </a>
-    </li>
-  `).join('');
+  contactsList.innerHTML = CONFIG.contacts.map((c) => {
+    // Иконки мессенджеров — только если ссылка задана в config.js
+    const socials = [
+      c.vk ? `<a class="contacts__social contacts__social--vk" href="${c.vk}" target="_blank" rel="noopener" aria-label="Написать во ВКонтакте">VK</a>` : '',
+      c.max ? `<a class="contacts__social contacts__social--max" href="${c.max}" target="_blank" rel="noopener" aria-label="Написать в MAX">MAX</a>` : '',
+    ].join('');
+    return `
+      <li class="contacts__item">
+        <a class="contacts__call" href="tel:${c.phone.replace(/[^+\d]/g, '')}">
+          <span class="contacts__who">${c.name}<small>${c.role}</small></span>
+          <span class="contacts__phone">${c.phone}</span>
+        </a>
+        ${socials ? `<div class="contacts__socials">${socials}</div>` : ''}
+      </li>
+    `;
+  }).join('');
 
   // Сердечки в футере
   document.getElementById('footerHearts').innerHTML =
