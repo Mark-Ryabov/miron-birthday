@@ -353,11 +353,12 @@ img {
   align-items: flex-start;
 }
 
-/* Точка на линии */
+/* Точка на линии: центр линии на 12px от края таймлайна (left:10 + width:4/2),
+   точка 14px → left = 12 - 7 - 34(padding) = -29px для точного центрирования */
 .timeline__item::before {
   content: '';
   position: absolute;
-  left: -30px;
+  left: -29px;
   top: 22px;
   width: 14px;
   height: 14px;
