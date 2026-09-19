@@ -18,7 +18,8 @@ if (typeof CONFIG === 'undefined') {
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
-window.scrollTo(0, 0);
+// 'instant' — иначе CSS scroll-behavior: smooth сделает видимую прокрутку вверх
+window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
 /* Цвета шариков и конфетти — из палитры сайта */
 const PALETTE = ['#ffd93d', '#ff9a3d', '#4ecdc4', '#ff6b6b', '#ff8e8e', '#7be0d8'];
@@ -175,8 +176,9 @@ function startCountdown() {
     el.secondsLabel.textContent = plural(seconds, ['секунда', 'секунды', 'секунд']);
   }
 
+  let timer; // объявлен до первого tick(): clearInterval(undefined) — безопасный no-op
   tick(); // сразу, без секундной задержки
-  const timer = setInterval(tick, 1000);
+  timer = setInterval(tick, 1000);
 }
 
 /* ------------------------------------------------------------
@@ -207,7 +209,7 @@ function createBalloons() {
     balloon.style.opacity = rand(0.55, 0.9);
     container.appendChild(balloon);
 
-    if (!REDUCED_MOTION) {
+    if (!REDUCED_MOTION && typeof gsap !== 'undefined') {
       // Парение: вверх-вниз + лёгкое покачивание в стороны
       gsap.to(balloon, {
         y: `-=${rand(20, 45)}`,
@@ -235,7 +237,7 @@ function createBalloons() {
    ------------------------------------------------------------ */
 
 function launchConfetti() {
-  if (REDUCED_MOTION) return;
+  if (REDUCED_MOTION || typeof gsap === 'undefined') return;
 
   const container = document.getElementById('confetti');
   const COUNT = 90;
@@ -303,9 +305,10 @@ function initMapOverlay() {
    ------------------------------------------------------------ */
 
 function initAnimations() {
-  gsap.registerPlugin(ScrollTrigger);
+  // CDN не загрузился или пользователь просит меньше движения — контент виден и без анимаций
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || REDUCED_MOTION) return;
 
-  if (REDUCED_MOTION) return; // контент виден и без анимаций
+  gsap.registerPlugin(ScrollTrigger);
 
   // Появление элементов hero друг за другом
   gsap.from('[data-anim="hero"]', {

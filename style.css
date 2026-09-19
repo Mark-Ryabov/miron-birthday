@@ -48,6 +48,7 @@ img {
 
 .hero {
   position: relative;
+  min-height: 100vh; /* фолбэк для браузеров без svh */
   min-height: 100svh;
   display: flex;
   align-items: center;
@@ -188,6 +189,11 @@ img {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
+}
+
+/* display:grid выше переопределяет атрибут hidden — возвращаем скрытие */
+.countdown__grid[hidden] {
+  display: none;
 }
 
 .countdown__card {
