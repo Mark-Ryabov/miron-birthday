@@ -106,6 +106,7 @@ img {
   padding: 0.1em 0.7em;
   box-shadow: var(--shadow);
   transform: rotate(-3deg);
+  animation: wobble 3.2s ease-in-out infinite;
 }
 
 .hero__date {
@@ -130,6 +131,18 @@ img {
 @keyframes bounce {
   0%, 100% { transform: translate(-50%, 0); }
   50%      { transform: translate(-50%, 10px); }
+}
+
+/* Лёгкое покачивание бейджа возраста */
+@keyframes wobble {
+  0%, 100% { transform: rotate(-4deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+/* Дыхание точек таймлайна */
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--coral); }
+  50%      { box-shadow: 0 0 0 6px rgba(255, 107, 107, 0.3); }
 }
 
 .hero__wave {
@@ -241,6 +254,7 @@ img {
   box-shadow: var(--shadow);
   padding: 28px 22px;
   text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .where__datetime {
@@ -321,6 +335,10 @@ img {
   box-shadow: 0 14px 34px rgba(74, 63, 53, 0.2);
 }
 
+.btn:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
 /* ============ ПРОГРАММА (таймлайн) ============ */
 
 .timeline {
@@ -351,13 +369,20 @@ img {
   display: flex;
   gap: 14px;
   align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .timeline__icon {
   position: relative; /* точка таймлайна позиционируется от иконки */
-  font-size: 1.7rem;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
   line-height: 1;
   flex-shrink: 0;
+  border-radius: 14px;
+  background: var(--cream);
 }
 
 /* Точка на линии: вертикально — по центру иконки (top:50% + translateY),
@@ -375,6 +400,7 @@ img {
   background: var(--coral);
   border: 3px solid var(--cream);
   box-shadow: 0 0 0 2px var(--coral);
+  animation: dotPulse 2.6s ease-in-out infinite;
 }
 
 .timeline__time {
@@ -413,6 +439,7 @@ img {
   box-shadow: var(--shadow);
   padding: 14px 18px;
   font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .bring__icon {
@@ -466,12 +493,19 @@ img {
   box-shadow: var(--shadow);
   padding: 32px 24px;
   text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .gifts__icon {
-  font-size: 3rem;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 16px;
+  font-size: 2.6rem;
   line-height: 1;
-  margin-bottom: 14px;
+  border-radius: 50%;
+  background: var(--cream);
 }
 
 .gifts__text {
@@ -501,7 +535,7 @@ img {
 }
 
 .contacts__item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-1px);
   box-shadow: 0 14px 34px rgba(74, 63, 53, 0.2);
 }
 
@@ -584,14 +618,33 @@ img {
   text-decoration: underline;
 }
 
+/* Лёгкий подъём всех карточек при наведении */
+.timeline__item:hover,
+.bring__item:hover,
+.where__card:hover,
+.gifts__card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(74, 63, 53, 0.2);
+}
+
 /* ============ ФУТЕР ============ */
 
-.footer {
+/* Волна перед футером — повторяет переход из hero */
+.footer__wave {
   margin-top: 64px;
+  line-height: 0;
+}
+
+.footer__wave svg {
+  display: block;
+  width: 100%;
+  height: 60px;
+}
+
+.footer {
   padding: 64px 20px 48px;
   text-align: center;
   background: linear-gradient(160deg, var(--turquoise) 0%, #7be0d8 100%);
-  border-radius: 48px 48px 0 0;
 }
 
 .footer__text {
@@ -635,9 +688,17 @@ img {
   }
 }
 
+/* Видимый фокус для клавиатурной навигации */
+:focus-visible {
+  outline: 3px solid var(--turquoise);
+  outline-offset: 2px;
+}
+
 /* Уменьшенная анимация для тех, кто просит меньше движения */
 @media (prefers-reduced-motion: reduce) {
-  .hero__scroll {
+  .hero__scroll,
+  .hero__age,
+  .timeline__icon::before {
     animation: none;
   }
 }
