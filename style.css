@@ -366,7 +366,7 @@ img {
 .timeline__icon::before {
   content: '';
   position: absolute;
-  left: -47px;
+  left: -50px;
   top: 50%;
   transform: translateY(-50%);
   width: 14px;
