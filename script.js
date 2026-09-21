@@ -59,12 +59,12 @@ function renderContent() {
   document.getElementById('childName').textContent = CONFIG.childName;
   document.getElementById('childAge').textContent =
     `${CONFIG.age} ${plural(CONFIG.age, ['год', 'года', 'лет'])}`;
-  document.getElementById('partyDate').textContent =
-    `${CONFIG.dateDisplay} · ${CONFIG.timeDisplay}`;
+  document.getElementById('partyDate').innerHTML =
+    `${CONFIG.dateDisplay}<br>${CONFIG.timeDisplay}`;
 
   // Где и когда
-  document.getElementById('whereDateTime').textContent =
-    `${CONFIG.dateDisplay}, ${CONFIG.timeDisplay}`;
+  document.getElementById('whereDateTime').innerHTML =
+    `${CONFIG.dateDisplay}<br>${CONFIG.timeDisplay}`;
   document.getElementById('address').textContent = CONFIG.address;
   document.getElementById('mapIframe').src = CONFIG.mapIframeSrc;
   document.getElementById('mapLink').href = CONFIG.mapLink;
