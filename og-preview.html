@@ -19,35 +19,74 @@
     color: #4a3f35;
     position: relative;
     overflow: hidden;
+    text-align: center;
   }
-  .emoji { position: absolute; font-size: 90px; }
+  .balloon { position: absolute; }
   .invite {
-    font-family: 'Pacifico', cursive;
-    font-size: 110px;
-    color: #ff6b6b;
-    text-shadow: 0 5px 0 rgba(255, 255, 255, 0.65);
-  }
-  .sub {
-    font-size: 42px;
     font-weight: 700;
-    margin-top: 30px;
-    background: rgba(255, 255, 255, 0.75);
-    padding: 14px 40px;
+    font-size: 34px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .name {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    font-size: 150px;
+    line-height: 1.15;
+    color: #ffffff;
+    text-shadow: 0 4px 0 rgba(214, 90, 90, 0.55), 0 10px 30px rgba(74, 63, 53, 0.25);
+    margin: 10px 0 18px;
+  }
+  .age {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 64px;
+    background: #ffd93d;
     border-radius: 999px;
+    padding: 0.1em 0.7em;
+    box-shadow: 0 10px 30px rgba(74, 63, 53, 0.12);
+    transform: rotate(-3deg);
   }
 </style>
 </head>
 <body>
-  <span class="emoji" style="top:50px;left:90px">🎈</span>
-  <span class="emoji" style="top:80px;right:110px">🎈</span>
-  <span class="emoji" style="bottom:70px;left:190px">🎉</span>
-  <span class="emoji" style="bottom:55px;right:210px">🎂</span>
-  <span class="emoji" style="top:290px;left:55px;font-size:64px">🎁</span>
-  <span class="emoji" style="top:330px;right:65px;font-size:64px">⭐</span>
-  <span class="emoji" style="top:170px;left:330px;font-size:50px">🎈</span>
-  <span class="emoji" style="bottom:200px;right:380px;font-size:50px">🎉</span>
+  <!-- Шарики — та же SVG-разметка, что генерирует script.js в hero -->
+  <div class="balloon" style="top:60px;left:110px;transform:scale(1.05);opacity:0.85">
+    <svg viewBox="0 0 60 100" width="60" height="100">
+      <ellipse cx="30" cy="30" rx="26" ry="30" fill="#ff6b6b"/>
+      <ellipse cx="22" cy="20" rx="8" ry="10" fill="rgba(255,255,255,0.35)"/>
+      <polygon points="30,60 25,68 35,68" fill="#ff6b6b"/>
+      <path d="M30 68 q7 12 -3 30" stroke="rgba(74,63,53,0.4)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="balloon" style="top:90px;right:130px;transform:scale(0.9);opacity:0.8">
+    <svg viewBox="0 0 60 100" width="60" height="100">
+      <ellipse cx="30" cy="30" rx="26" ry="30" fill="#4ecdc4"/>
+      <ellipse cx="22" cy="20" rx="8" ry="10" fill="rgba(255,255,255,0.35)"/>
+      <polygon points="30,60 25,68 35,68" fill="#4ecdc4"/>
+      <path d="M30 68 q7 12 -3 30" stroke="rgba(74,63,53,0.4)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="balloon" style="bottom:80px;left:230px;transform:scale(0.7);opacity:0.7">
+    <svg viewBox="0 0 60 100" width="60" height="100">
+      <ellipse cx="30" cy="30" rx="26" ry="30" fill="#ff9a3d"/>
+      <ellipse cx="22" cy="20" rx="8" ry="10" fill="rgba(255,255,255,0.35)"/>
+      <polygon points="30,60 25,68 35,68" fill="#ff9a3d"/>
+      <path d="M30 68 q7 12 -3 30" stroke="rgba(74,63,53,0.4)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="balloon" style="bottom:110px;right:260px;transform:scale(0.75);opacity:0.75">
+    <svg viewBox="0 0 60 100" width="60" height="100">
+      <ellipse cx="30" cy="30" rx="26" ry="30" fill="#ffd93d"/>
+      <ellipse cx="22" cy="20" rx="8" ry="10" fill="rgba(255,255,255,0.35)"/>
+      <polygon points="30,60 25,68 35,68" fill="#ffd93d"/>
+      <path d="M30 68 q7 12 -3 30" stroke="rgba(74,63,53,0.4)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
 
-  <div class="invite">День рождения!</div>
-  <div class="sub">Приглашаем на праздник 🎈</div>
+  <p class="invite">Приглашаем на день рождения</p>
+  <h1 class="name">Мирон</h1>
+  <div class="age">5 лет</div>
 </body>
 </html>
